@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <iostream>
 #include "node.h"
 
@@ -64,11 +63,11 @@ void node::insert(int val) {
         while (val < ptr->data && ptr->prev) {
             ptr = ptr->prev;
         }
+        if (ptr->data == val) {
+            delete nNode;
+            return;
+        }
         if (val > ptr->data) {
-            if (ptr->data == val) {
-                delete nNode;
-                return;
-            }
             nNode->prev = ptr;
             nNode->next = ptr->next;
             nNode->next->prev = nNode;
@@ -82,11 +81,11 @@ void node::insert(int val) {
         while (val > ptr->data && ptr->next) {
             ptr = ptr->next;
         }
-        if (val < ptr->data) {
-            if (ptr->data == val) {
-                delete nNode;
-                return;
-            }
+        if (ptr->data == val) {
+            delete nNode;
+            return;
+        }
+        if (val <= ptr->data) {
             nNode->next = ptr;
             nNode->prev = ptr->prev;
             ptr->prev = nNode;
